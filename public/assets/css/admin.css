@@ -1,0 +1,17 @@
+.login-box {
+	margin-top: 15%;
+	width: 300px;
+}
+
+.login-box .brand {
+	margin-bottom: 20px;
+}
+
+.login-box .brand h1 {
+	margin: 0;
+}
+
+.login-box label {
+	color: #999;
+	text-transform: uppercase;
+}
