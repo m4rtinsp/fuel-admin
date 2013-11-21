@@ -27,53 +27,31 @@
 		<thead>
 			<tr>
 				<th width="3%"><input type="checkbox" /></th>
-				<th>
-					First name
-				</th>
-				<th>
-					Second name
-				</th>
-				<th>
-					Last name
-				</th>
+				<?php foreach ($fields as $field): ?>
+				<th><?php echo $field ?></th>
+				<?php endforeach ?>
 				<th width="22%">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
+			<?php foreach ($data as $key => $item): ?>
 			<tr>
 				<td><input type="checkbox" /></td>
-				<td>Conrad</td>
-				<td>Henry</td>
-				<td>Greyson</td>
+				<td><?php echo $item->$fields[0] ?></td>
+				<td><?php echo $item->$fields[1] ?></td>
 				<td>
-					<a href="#" class="btn btn-danger btn-sm">
+					<a href="<?php echo Router::get($routes['remove'], array('id'=>$item->id)) ?>" class="btn btn-danger btn-sm">
 						<span class="glyphicon glyphicon-remove"></span> Excluir
 					</a>
-					<a href="<?php echo Router::get('admin_sample_edit', array('id'=>1)) ?>" class="btn btn-info btn-sm">
+					<a href="<?php echo Router::get($routes['edit'], array('id'=>$item->id)) ?>" class="btn btn-info btn-sm">
 						<span class="glyphicon glyphicon-pencil"></span> Editar
 					</a>
-					<a href="#" class="btn btn-default btn-sm">
+					<a href="<?php echo Router::get($routes['view'], array('id'=>$item->id)) ?>" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-align-left"></span> Detalhes
 					</a>
 				</td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" /></td>
-				<td>Victoria</td>
-				<td>Henry</td>
-				<td>Greyson</td>
-				<td>
-					<button type="button" class="btn btn-danger btn-sm">
-						<span class="glyphicon glyphicon-remove"></span> Excluir
-					</button>
-					<button type="button" class="btn btn-info btn-sm">
-						<span class="glyphicon glyphicon-pencil"></span> Editar
-					</button>
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-align-left"></span> Detalhes
-					</button>
-				</td>
-			</tr>
+			<?php endforeach ?>
 		</tbody>
 	</table>
 </div>

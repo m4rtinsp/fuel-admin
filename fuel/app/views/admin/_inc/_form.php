@@ -6,19 +6,15 @@
 
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<form role="form">
-			<div class="form-group">
-				<label>Name</label>
-				<input type="email" class="form-control" placeholder="Enter name">
-			</div>
-			<div class="form-group">
-				<label>Second name</label>
-				<input type="text" class="form-control" placeholder="Enter second name">
-			</div>
-			<div class="form-group">
-				<label>Last name</label>
-				<input type="text" class="form-control" placeholder="Enter last name">
-			</div>
+		<form action="" method="POST" role="form">
+			<?php foreach ($data as $key => $item): ?>
+				<?php if( array_search($key, $fields) !== false ): ?>
+				<div class="form-group">
+					<label><?php echo $key ?></label>
+					<input type="email" class="form-control" value="<?php echo $item ?>" placeholder="Enter name">
+				</div>
+				<?php endif; ?>
+			<?php endforeach ?>
 
 			<div class="clearfix">
 				<br/>
