@@ -1,6 +1,7 @@
 <?php
-	echo View::forge('admin/_inc/_form', array(
+	echo View::forge('admin/_inc/_edit_form', array(
 		'title'=>$title,
 		'data'=>$user, 
-		'fields'=>array('username', 'group', 'email'),
+		'model'=>'User',
+		'fields'=>array('username', 'email', 'group'),
 	)); ?>

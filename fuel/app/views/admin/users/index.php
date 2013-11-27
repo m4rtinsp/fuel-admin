@@ -9,4 +9,5 @@
 			'view'=>'admin_users_view',
 			'new'=>'admin_users_new',
 		)
-	)); ?>
+	));
+?>

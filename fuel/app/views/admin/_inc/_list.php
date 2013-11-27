@@ -1,6 +1,7 @@
 <div class="row">
-	<div class="page-header">
-		<h1><?php echo $title ?></h1>
+	<div class="page-header clearfix">
+		<h1 class="pull-left"><?php echo $title ?></h1>
+		<a href="<?php echo Router::get($routes['new']) ?>" class="btn btn-primary pull-right">Adicionar</a>
 	</div>
 </div>
 
@@ -21,6 +22,14 @@
 </div>
 
 <br/><br/>
+
+<?php if ( Session::get_flash('success') ): ?>
+<div class="row">
+	<div class="alert alert-success">
+		<?php echo Session::get_flash('success'); ?>
+	</div>
+</div>
+<?php endif ?>
 
 <div class="row">
 	<table class="table table-hover table-striped">
