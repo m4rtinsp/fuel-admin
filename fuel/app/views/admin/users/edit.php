@@ -3,5 +3,5 @@
 		'title'=>$title,
 		'data'=>$user, 
 		'model'=>'User',
-		'fields'=>array('username', 'email', 'group'),
+		'fields'=>array('username', 'email', 'group', 'password'),
 	)); ?>

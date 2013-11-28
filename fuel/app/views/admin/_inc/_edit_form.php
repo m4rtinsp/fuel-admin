@@ -4,17 +4,7 @@
 	</div>
 </div>
 
-<?php if ( Session::get_flash('error') ): ?>
-<div class="row">
-	<div class="alert alert-danger">
-		<ul>
-		<?php foreach (Session::get_flash('error') as $error): ?>
-			<li><?php echo $error ?></li>
-		<?php endforeach ?>
-		</ul>
-	</div>
-</div>
-<?php endif ?>
+<?php echo View::forge('admin/_inc/_alert_message', array('list'=>true)); ?>
 
 <div class="row">
 	<div class="col-xs-12 col-md-6">

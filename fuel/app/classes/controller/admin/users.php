@@ -2,7 +2,7 @@
 
 class Controller_Admin_Users extends Controller_Admin_Base
 {
-	protected $action;
+	public $page_title = 'Usuários';
 
 	public function action_index()
 	{
@@ -56,7 +56,23 @@ class Controller_Admin_Users extends Controller_Admin_Base
 		$this->template->content = $view;
 	}
 
-	public function save($user, $action)
+	public function action_remove($id)
+	{
+		$user = Model_User::find($id);
+		$current_user = Auth::get_user_id();
+
+		if ($current_user[1] == $user->id) {
+			Session::set_flash('error', e('Você não pode remover o usuário: #' . $user->username));
+		}
+		else {
+			Auth::delete_user($user->username);
+			Session::set_flash('success', e('Usuário removido com sucesso: #' . $user->username));
+		}
+		
+		Response::redirect('admin/users');
+	}
+
+	private function save($user, $action)
 	{
 		$check_password = (Input::post('password') OR $action == 'new') ? true : false;
 		$val = Model_User::validate('edit', $check_password);
@@ -66,17 +82,31 @@ class Controller_Admin_Users extends Controller_Admin_Base
 			if ($action == 'new')
 			{
 				$status = Auth::create_user(Input::post('username'), Input::post('password'), Input::post('email'), (int)Input::post('group'));
+
+				if ($status)
+				{
+					Session::set_flash('success', e('Usuário adicionado com sucesso: #' . Input::post('username')));
+				}
 			}
 			else
 			{
 				$user->username = Input::post('username');
 				$user->email = Input::post('email');
+
+				if (Input::post('password')) {
+					$user->password = Auth::hash_password( Input::post('password') );
+				}
+
 				$status = $user->save();
+
+				if ($status)
+				{
+					Session::set_flash('success', e('Usuário alterado com sucesso: #' . Input::post('username')));
+				}
 			}
 
 			if ($status)
 			{
-				Session::set_flash('success', e('Usuário adicionado com sucesso: #' . Input::post('username')));
 				Response::redirect('admin/users');
 			}
 			else
@@ -92,21 +122,5 @@ class Controller_Admin_Users extends Controller_Admin_Base
 
 			Session::set_flash('error', $val->error());
 		}
-	}
-
-	protected function load_model($id)
-	{
-		if (Input::post('id'))
-		{
-			$this->action = 'edit';
-			$model = Model_User::find($id);
-		}
-		else
-		{
-			$this->action = 'new';
-			$model = new Model_User;
-		}
-
-		return $model;
 	}
 }

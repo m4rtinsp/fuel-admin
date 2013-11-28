@@ -23,13 +23,7 @@
 
 <br/><br/>
 
-<?php if ( Session::get_flash('success') ): ?>
-<div class="row">
-	<div class="alert alert-success">
-		<?php echo Session::get_flash('success'); ?>
-	</div>
-</div>
-<?php endif ?>
+<?php echo View::forge('admin/_inc/_alert_message'); ?>
 
 <div class="row">
 	<table class="table table-hover table-striped">
@@ -49,7 +43,7 @@
 				<td><?php echo $item->$fields[0] ?></td>
 				<td><?php echo $item->$fields[1] ?></td>
 				<td>
-					<a href="<?php echo Router::get($routes['remove'], array('id'=>$item->id)) ?>" class="btn btn-danger btn-sm">
+					<a href="<?php echo Router::get($routes['remove'], array('id'=>$item->id)) ?>" class="btn btn-danger btn-sm" rel="confirm" data-confirm-message="Tem certeza que deseja remover este item?">
 						<span class="glyphicon glyphicon-remove"></span> Excluir
 					</a>
 					<a href="<?php echo Router::get($routes['edit'], array('id'=>$item->id)) ?>" class="btn btn-info btn-sm">
