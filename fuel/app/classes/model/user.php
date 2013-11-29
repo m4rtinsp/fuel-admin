@@ -15,8 +15,6 @@ class Model_User extends \Orm\Model
 		'profile_fields',
 		'created_at',
 		'updated_at',
-		'created_at',
-		'updated_at',
 	);
 
 	protected static $_observers = array(
