@@ -7,9 +7,11 @@
 
 <div class="row">
 	<div class="col-lg-2">
-		<select name="" class="form-control" disabled>
-			<option value="">Ações</option>
-		</select>
+		<form action="" method="POST">
+			<select name="admin-filter" class="form-control" disabled>
+				<option value="">Ações</option>
+			</select>
+		</form>
 	</div>
 	<div class="col-lg-4 col-md-offset-6">
 		<div class="input-group">
@@ -26,10 +28,10 @@
 <?php echo View::forge('admin/_inc/_alert_message'); ?>
 
 <div class="row">
-	<table class="table table-hover table-striped">
+	<table class="table table-hover table-striped list-items">
 		<thead>
 			<tr>
-				<th width="3%"><input type="checkbox" /></th>
+				<th width="3%"><input type="checkbox" data-select="all" /></th>
 				<?php foreach ($fields as $field): ?>
 				<th><?php echo $field ?></th>
 				<?php endforeach ?>

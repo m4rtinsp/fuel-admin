@@ -1,7 +1,3 @@
-<?php if ($login_error): ?>
-	<?php echo $login_error ?>
-<?php endif ?>
-
 <div class="row">
 	<div class="login-box center-block">
 		<div class="brand">
@@ -16,6 +12,13 @@
 				<label>Senha</label>
 				<input type="password" name="password" class="form-control" placeholder="Digite sua senha">
 			</div>
+			<?php if ($login_error): ?>
+			<div class="form-group">
+				<div class="alert alert-danger text-center">
+					<?php echo $login_error ?>
+				</div>
+			</div>
+			<?php endif ?>
 			<div class="form-group">
 				<input type="submit" class="btn btn-lg btn-info btn-block" value="Continuar">
 			</div>

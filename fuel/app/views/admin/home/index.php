@@ -1,3 +1,5 @@
 <div class="row">
-	<p>Home</p>
+	<div class="jumbotron">
+		<h1>Bem-vindo!</h1>
+	</div>
 </div>
