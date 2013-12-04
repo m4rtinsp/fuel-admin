@@ -68,6 +68,6 @@
 
 	<?php echo Asset::js('vendor/jquery-1.10.1.min.js') ?>
 	<?php echo Asset::js('vendor/bootstrap.min.js'); ?>
-	<?php echo Asset::js('admin.js'); ?>
+	<?php echo Asset::js('admin/admin.js'); ?>
 	</body>
 </html>
