@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="page-header clearfix">
 		<h1 class="pull-left"><?php echo $title ?></h1>
-		<a href="<?php echo Router::get($routes['new']) ?>" class="btn btn-primary pull-right">Adicionar</a>
+		<a href="<?php echo Uri::create($uri['new']) ?>" class="btn btn-primary pull-right">Adicionar</a>
 	</div>
 </div>
 
@@ -46,13 +46,13 @@
 				<td><?php echo $item->$fields[0] ?></td>
 				<td><?php echo $item->$fields[1] ?></td>
 				<td>
-					<a href="<?php echo Router::get($routes['remove'], array('id'=>$item->id)) ?>" class="btn btn-danger btn-sm" rel="confirm" data-confirm-message="Tem certeza que deseja remover este item?">
+					<a href="<?php echo Uri::create($uri['remove'], array('id'=>$item->id)) ?>" class="btn btn-danger btn-sm" rel="confirm" data-confirm-message="Tem certeza que deseja remover este item?">
 						<span class="glyphicon glyphicon-remove"></span> Excluir
 					</a>
-					<a href="<?php echo Router::get($routes['edit'], array('id'=>$item->id)) ?>" class="btn btn-info btn-sm">
+					<a href="<?php echo Uri::create($uri['edit'], array('id'=>$item->id)) ?>" class="btn btn-info btn-sm">
 						<span class="glyphicon glyphicon-pencil"></span> Editar
 					</a>
-					<a href="<?php echo Router::get($routes['view'], array('id'=>$item->id)) ?>" class="btn btn-default btn-sm">
+					<a href="<?php echo Uri::create($uri['view'], array('id'=>$item->id)) ?>" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-align-left"></span> Detalhes
 					</a>
 				</td>

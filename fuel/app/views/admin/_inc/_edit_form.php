@@ -14,9 +14,18 @@
 				<div class="form-group">
 					<?php echo Form::label((isset($data->_labels[$key]['name']) ? $data->_labels[$key]['name'] : $key), $key); ?>
 					<?php if (isset($data->_labels[$key]['input_type']) AND $data->_labels[$key]['input_type']=='bigtext'): ?>
-					<textarea name="<?php echo $key ?>" cols="84" rows="5"><?php echo $item ?></textarea>
+						<textarea name="<?php echo $key ?>" cols="84" rows="5"><?php echo $item ?></textarea>
+					<?php elseif(isset($data->_labels[$key]['form_field']) AND $data->_labels[$key]['form_field']=='select'): ?>
+						<select name="<?php echo $key ?>" class="form-control">
+							<option value="">Escolha</option>
+						<?php if (isset($data->_labels[$key]['select_items']) AND is_array($data->_labels[$key]['select_items'])): ?>
+							<?php foreach ($data->_labels[$key]['select_items'] as $item_name => $item_value): ?>
+							<option value="<?php echo $item_value ?>" <?php if($item==$item_value): ?>selected='selected'<?php endif; ?>><?php echo $item_name ?></option>
+							<?php endforeach ?>
+						<?php endif ?>
+						</select>
 					<?php else: ?>
-					<input type="<?php echo isset($data->_labels[$key]['input_type']) ? $data->_labels[$key]['input_type'] : 'text' ?>" name="<?php echo $key ?>" class="form-control" value="<?php echo $key=='password' ? '' : $item ?>" placeholder="Enter <?php echo $key ?>">
+						<input type="<?php echo isset($data->_labels[$key]['input_type']) ? $data->_labels[$key]['input_type'] : 'text' ?>" name="<?php echo $key ?>" class="form-control" value="<?php echo $key=='password' ? '' : $item ?>" placeholder="Enter <?php echo $key ?>">
 					<?php endif ?>
 
 					<?php //echo Form::input($key, $item, array('class'=>'form-control')) ?>

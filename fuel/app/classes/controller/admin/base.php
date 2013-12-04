@@ -82,7 +82,7 @@ class Controller_Admin_Base extends Controller_Template
 				$url = strtolower($url);
 
 				$page_title = (isset($this->page_title) AND $this->page_title) ? $this->page_title : Request::active()->controller;
-				$this->breadcrumb[$page_title] = empty($pages) ? null : $url;
+				$this->breadcrumb[$page_title] = empty($pages) ? null : str_replace('_', '/', $url);
 			}
 
 			// If pages exists
@@ -90,11 +90,16 @@ class Controller_Admin_Base extends Controller_Template
 			{
 				foreach ( $pages as $i => $page )
 				{
-					$this->breadcrumb[$page] = count($pages)==($i+1) ? null : $url . '_' . Request::active()->action;
+					$this->breadcrumb[$page] = count($pages)==($i+1) ? null : $url . '/' . Request::active()->action;
 				}
 			}
 		}
 
 		$this->template->breadcrumb = !empty($this->breadcrumb) ? (object)$this->breadcrumb : $this->breadcrumb;
+	}
+
+	public static function active_page($controller, $action='index')
+	{
+		return ((Request::active()->controller == 'Controller_Admin_' . ucfirst($controller)) AND Request::active()->action == $action);
 	}
 }

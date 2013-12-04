@@ -3,11 +3,11 @@
 		'title'=>$title, 
 		'data'=>$users, 
 		'fields'=>array('username', 'email'), 
-		'routes'=>array(
-			'remove'=>'admin_users_remove',
-			'edit'=>'admin_users_edit',
-			'view'=>'admin_users_view',
-			'new'=>'admin_users_new',
+		'uri'=>array(
+			'remove'=>'admin/users/remove/:id',
+			'edit'=>'admin/users/edit/:id',
+			'view'=>'admin/users/view/:id',
+			'new'=>'admin/users/new',
 		)
 	));
 ?>

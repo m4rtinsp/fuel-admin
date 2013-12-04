@@ -29,10 +29,10 @@ class Model_User extends \Orm\Model
 	);
 
 	public $_labels = array(
-		'username' => array('name'=>'Usuário', 'input_type'=>'text'),
-		'password' => array('name'=>'Senha', 'input_type'=>'password'),
-		'group' => array('name'=>'Grupo', 'input_type'=>'text'),
-		'email' => array('name'=>'E-mail', 'input_type'=>'email'),
+		'username' => array('name'=>'Usuário', 'form_field'=>'text'),
+		'password' => array('name'=>'Senha', 'form_field'=>'password'),
+		'group' => array('name'=>'Grupo', 'form_field'=>'select', 'select_items'=>array('Administrador'=>100)),
+		'email' => array('name'=>'E-mail', 'form_field'=>'email'),
 	);
 
 	public static function validate($factory, $check_password = false)

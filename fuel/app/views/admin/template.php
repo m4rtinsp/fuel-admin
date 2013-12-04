@@ -28,25 +28,17 @@
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="<?php echo Router::get('admin') ?>">Dashboard</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Item <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-							</ul>
-						</li>
+						<li class="<?php echo Controller_Admin_Base::active_page('home') ? 'active' : '' ?>"><a href="<?php echo Router::get('admin') ?>">Dashboard</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo Router::get('admin_help') ?>">Ajuda</a></li>
+						<li class="<?php echo Controller_Admin_Base::active_page('help') ? 'active' : '' ?>"><a href="<?php echo Uri::create('admin/help') ?>">Ajuda</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo Auth::get_screen_name() ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo Router::get('admin_users') ?>">Gerenciar usuários</a></li>
+								<li class="<?php echo Controller_Admin_Base::active_page('users') ? 'active' : '' ?>"><a href="<?php echo Uri::create('admin/users') ?>">Gerenciar usuários</a></li>
 								<li class="divider"></li>
-								<li><a href="<?php echo Router::get('admin_logout') ?>">Sair</a></li>
+								<li><a href="<?php echo Uri::create('admin/login/logout') ?>">Sair</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -64,7 +56,7 @@
 						<?php if(!$url): ?>
 							<li class="active"><?php echo $page ?></li>
 						<?php else: ?>
-							<li class="active"><a href="<?php echo Router::get($url) ?>"><?php echo $page ?></a></li>
+							<li class="active"><a href="<?php echo Uri::create($url) ?>"><?php echo $page ?></a></li>
 						<?php endif ?>
 					<?php endforeach ?>
 				<?php endif ?>

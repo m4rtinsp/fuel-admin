@@ -1,5 +1,5 @@
 <div class="row">
 	<div class="jumbotron">
-		<h1>Bem-vindo!</h1>
+		<h1 class="text-center">Bem-vindo!</h1>
 	</div>
 </div>
