@@ -7,9 +7,9 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
-		<?php echo Asset::css('bootstrap.min.css'); ?>
-		<?php echo Asset::css('admin.css'); ?>
-        <?php echo Asset::js('modernizr-2.6.2.min.js'); ?>
+		<?php echo Asset::css('vendor/bootstrap.min.css'); ?>
+		<?php echo Asset::css('admin/admin.css'); ?>
+        <?php echo Asset::js('vendor/modernizr-2.6.2.min.js'); ?>
 	</head>
 	<body>
 
@@ -66,8 +66,8 @@
 		<?php echo $content ?>
 	</div>
 
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<?php echo Asset::js('bootstrap.min.js'); ?>
+	<?php echo Asset::js('vendor/jquery-1.10.1.min.js') ?>
+	<?php echo Asset::js('vendor/bootstrap.min.js'); ?>
 	<?php echo Asset::js('admin.js'); ?>
 	</body>
 </html>
