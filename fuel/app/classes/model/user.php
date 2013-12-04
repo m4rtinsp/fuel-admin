@@ -62,4 +62,20 @@ class Model_User extends \Orm\Model
 			}
 		}
 	}
+
+	public static function all()
+	{
+		$where = array();
+
+		if (isset($_GET['term']) AND $_GET['term'])
+		{
+			$data = Model_User::query()->where('username', 'LIKE', "%{$_GET['term']}%")->or_where('email', 'LIKE', "%{$_GET['term']}%")->get();
+		}
+		else
+		{
+			$data = Model_User::find('all');
+		}
+
+		return $data;
+	}
 }

@@ -8,10 +8,9 @@ class Controller_Admin_Users extends Controller_Admin_Base
 	{
 		$view = View::forge('admin/users/index');
 		$view->set('title', 'Usuários');
-		$view->set('users', Model_User::find('all'));
+		$view->set('users', Model_User::all());
 
-		// Breadcrumb
-		$this->set_breadcrumb();
+		parent::_index();
 
 		$this->template->content = $view;
 	}
@@ -20,14 +19,7 @@ class Controller_Admin_Users extends Controller_Admin_Base
 	{
 		$user = new Model_User;
 
-		// Breadcrumb
-		$this->set_breadcrumb(array('Adicionar'));
-
-		// Save
-		if (Input::method() == 'POST')
-		{
-			$this->save($user, 'new');
-		}
+		parent::_addOrUpdate($user, 'Adicionar', 'new');
 
 		$view = View::forge('admin/users/create');
 		$view->set('title', 'Adicionar Usuário');
@@ -40,14 +32,7 @@ class Controller_Admin_Users extends Controller_Admin_Base
 	{
 		$user = Model_User::find($id);
 
-		// Breadcrumb
-		$this->set_breadcrumb(array('Editar'));
-
-		// Save
-		if (Input::method() == 'POST')
-		{
-			$this->save($user, 'edit');
-		}
+		parent::_addOrUpdate($user, 'Editar', 'edit');
 
 		$view = View::forge('admin/users/edit');
 		$view->set('title', 'Editar Usuário');
@@ -72,7 +57,7 @@ class Controller_Admin_Users extends Controller_Admin_Base
 		Response::redirect('admin/users');
 	}
 
-	private function save($user, $action)
+	protected function save($user, $action)
 	{
 		$check_password = (Input::post('password') OR $action == 'new') ? true : false;
 		$val = Model_User::validate('edit', $check_password);
@@ -122,5 +107,18 @@ class Controller_Admin_Users extends Controller_Admin_Base
 
 			Session::set_flash('error', $val->error());
 		}
+	}
+
+	protected function check_filter()
+	{
+		$class = new Model_User;
+
+		parent::_filter(
+			$class, 
+			array('remove'=>array(
+				'success' => 'Usuário(s) removido(s) com sucesso!', 
+				'error' => 'Ocorreu um erro ao tentar remover o(s) usuário(s), tente novamente!'
+			))
+		);
 	}
 }

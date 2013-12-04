@@ -16,7 +16,61 @@ class Controller_Admin_Base extends Controller_Template
 		}
 	}
 
-	public function set_breadcrumb($pages=array())
+	// Action override
+	protected function _index()
+	{
+		// Filter
+		$this->check_filter();
+
+		// Breadcrumb
+		$this->set_breadcrumb();
+	}
+
+	// Action override
+	protected function _addOrUpdate($data, $title, $action)
+	{
+		// Breadcrumb
+		$this->set_breadcrumb(array($title));
+
+		// Save
+		if (Input::method() == 'POST')
+		{
+			$this->save($data, $action);
+		}
+	}
+
+	protected function _filter($class, $messages=array())
+	{
+		if (isset($_GET['filter']))
+		{
+			switch ($_GET['filter']) {
+				case 'remove':
+					if (isset($_GET['ids']) AND $_GET['ids'])
+					{
+						$ids = explode(',', $_GET['ids']);
+
+						foreach ($ids as $id)
+						{
+							$class::find($id)->delete();
+						}
+
+						Session::set_flash('success', $messages['remove']['success']);
+					}
+					else
+					{
+						Session::set_flash('error', $messages['remove']['error']);
+					}
+
+					Response::redirect('admin/users');
+					break;
+				
+				default:
+					break;
+			}
+		}
+	}
+
+	protected function set_breadcrumb($pages=array())
 	{
 		if ( !(Request::active()->controller == 'Controller_Admin_Home' AND Request::active()->action == 'index') )
 		{

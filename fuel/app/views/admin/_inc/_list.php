@@ -7,19 +7,20 @@
 
 <div class="row">
 	<div class="col-lg-2">
-		<form action="" method="POST">
-			<select name="admin-filter" class="form-control" disabled>
-				<option value="">Ações</option>
-			</select>
-		</form>
+		<select name="admin-filter" class="form-control" disabled>
+			<option value="">Ações</option>
+			<option value="remove">Remover</option>
+		</select>
 	</div>
 	<div class="col-lg-4 col-md-offset-6">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Digite o que procura">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Buscar!</button>
-			</span>
-		</div>
+		<form action="">
+			<div class="input-group">
+				<input type="text" name="term" class="form-control" placeholder="Digite o que procura" value="<?php echo isset($_GET['term']) ? $_GET['term'] : '' ?>">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Buscar!</button>
+				</span>
+			</div>
+		</form>
 	</div>
 </div>
 
@@ -41,7 +42,7 @@
 		<tbody>
 			<?php foreach ($data as $key => $item): ?>
 			<tr>
-				<td><input type="checkbox" /></td>
+				<td><input type="checkbox" name="id" value="<?php echo $item->id ?>" /></td>
 				<td><?php echo $item->$fields[0] ?></td>
 				<td><?php echo $item->$fields[1] ?></td>
 				<td>

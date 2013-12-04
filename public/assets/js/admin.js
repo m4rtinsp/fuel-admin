@@ -27,4 +27,31 @@ $(function(){
 			$('table.list-items tbody input[type=checkbox]').prop('checked', false);
 		}
 	});
+
+	// Select any
+	$('table.list-items tbody input[type=checkbox]').bind('click', function(){
+		if ($('table.list-items tbody input[type=checkbox]:checked').length>0) {
+			$('select[name=admin-filter]').removeAttr('disabled');
+		}
+		else {
+			$('select[name=admin-filter]').attr('disabled', 'disabled');
+		}
+	});
+
+	// Actions
+	$('select[name=admin-filter]').change(function(){
+		var action = $(this).val();
+		var ids = [];
+
+		switch (action)
+		{
+			case 'remove':
+				$('table.list-items tbody input[type=checkbox]:checked').each(function(i, val){
+					ids.push($(val).val());
+				});
+
+				location.href = location.href + '?filter=remove&ids=' + ids;
+				break;
+		}
+	});
 });
