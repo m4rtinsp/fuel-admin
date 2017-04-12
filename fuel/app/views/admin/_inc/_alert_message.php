@@ -3,9 +3,13 @@
 	<div class="row">
 		<div class="alert alert-danger">
 			<ul>
-			<?php foreach (Session::get_flash('error') as $error): ?>
-				<li><?php echo $error ?></li>
-			<?php endforeach ?>
+			<?php if (is_array(Session::get_flash('error'))): ?>
+				<?php foreach (Session::get_flash('error') as $error): ?>
+					<li><?php echo $error ?></li>
+				<?php endforeach ?>
+			<?php else: ?>
+				<li><?php echo Session::get_flash('error'); ?></li>
+			<?php endif ?>
 			</ul>
 		</div>
 	</div>

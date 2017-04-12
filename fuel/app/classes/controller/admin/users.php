@@ -61,12 +61,18 @@ class Controller_Admin_Users extends Controller_Admin_Base
 	{
 		$check_password = (Input::post('password') OR $action == 'new') ? true : false;
 		$val = Model_User::validate('edit', $check_password);
+		$status = false;
 
 		if ($val->run())
 		{
 			if ($action == 'new')
 			{
-				$status = Auth::create_user(Input::post('username'), Input::post('password'), Input::post('email'), (int)Input::post('group'));
+				try {
+					$status = Auth::create_user(Input::post('username'), Input::post('password'), Input::post('email'), (int)Input::post('group'));
+				}
+				catch (Exception $e) {
+					return Session::set_flash('error', e('Este e-mail já esta sendo usado.'));
+				}
 
 				if ($status)
 				{
